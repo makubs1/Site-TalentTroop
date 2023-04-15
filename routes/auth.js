@@ -28,6 +28,7 @@ router.post('/register',async(req, res) => {
     let user = new User(req.body)
     user.save((err, data) => {
         if (err) return res.status(500).json(resp(false, err.message))
+        console.log(data._id.toString)
         res.json(resp(true, {
             token: jwt.sign({ id: data._id.toString() }, process.env.JWT, {
                 expiresIn: "14d"
